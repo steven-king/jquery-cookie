@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Titles</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+    <script src="jquery.cookie.js"></script>
+    <script src="app.js"></script>
+    
+    <script>$(document).ready(function(){
+        $.cookie('lg_game_money', '0', { expires: 1,  path: '/' });
+        var money = 0;
+        var cookie;
+        
+        $(".cookie").click(function(e) {
+            e.preventDefault();
+            console.log("read cookie clicked.")
+            value = $(this).attr('href');
+            
+            
+            if (value == "#"){
+                money = $.cookie('lg_game_money');
+                console.log("Total $" + money);
+            }else{
+                value = value.replace("#", "");
+                value = parseInt(value);
+                cookie = parseInt($.cookie('lg_game_money'))
+                console.log("value: " + value)
+                console.log("cookie: " + cookie);
+                
+                value= (eval(cookie + value));
+                console.log("calculated value" + value)
+                
+                $.cookie('lg_game_money', value , { expires: 1,  path: '/' });
+                console.log("$10 added to total");
+            }
+            
+            
+            
+        });
+    });
+    
+    
+    </script>
+</head>
+
+<body>
+<a href="#" class="cookie">Get Cookie Value</a>
+<a href="#10" class="cookie">+$10</a>
+
+
+
+</body>
+</html>
